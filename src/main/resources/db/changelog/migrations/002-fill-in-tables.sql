@@ -24,3 +24,17 @@ INSERT INTO recording (song_code, title, version, release_time, singer_id ) VALU
 
 INSERT INTO recording (song_code, title, version, release_time, singer_id ) VALUES
 ('SN 127', 'Nothing else matters', '1', '1991-01-15', 4);
+
+
+INSERT INTO rule (end_date, price, start_date, company_id) VALUES
+('2022-03-15', 11.3, '2022-02-15', 1);
+
+INSERT INTO rule (end_date, price, start_date, company_id) VALUES
+('2022-04-15', 30.3, '2022-01-15', 3);
+
+
+INSERT INTO rule_recording (recording_id, rule_id) VALUES
+(1, 1);
+
+INSERT INTO rule_recording (recording_id, rule_id) VALUES
+(1, 2);
