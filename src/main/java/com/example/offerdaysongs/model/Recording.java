@@ -1,12 +1,18 @@
 package com.example.offerdaysongs.model;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Set;
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 public class Recording {
     @Id
@@ -18,7 +24,9 @@ public class Recording {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id", insertable = false, updatable = false)
     Singer singer;
-    @ManyToMany
-    @JoinTable(name = "rule_recording", joinColumns = @JoinColumn(name = "recording_id"), inverseJoinColumns = @JoinColumn(name = "rule_id"))
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "rule_recording",
+            joinColumns = @JoinColumn(name = "recording_id"),
+            inverseJoinColumns = @JoinColumn(name = "rule_id"))
     Set<Rule> rules;
 }

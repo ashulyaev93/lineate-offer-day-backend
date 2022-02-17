@@ -17,7 +17,10 @@ public class RuleService {
     private RecordingRepository recordingRepository;
 
     public RuleService(RuleRepository ruleRepository,
-                       RecordingRepository recordingRepository){}
+                       RecordingRepository recordingRepository){
+        this.ruleRepository = ruleRepository;
+        this.recordingRepository = recordingRepository;
+    }
 
     public List<Rule> getAll() {
         return ruleRepository.findAll();

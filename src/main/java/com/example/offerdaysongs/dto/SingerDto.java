@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class SingerDto {
-    long id;
+    Long id;
     String name;
 }
