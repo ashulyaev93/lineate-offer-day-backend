@@ -1,9 +1,7 @@
 package com.example.offerdaysongs.controller;
 
-import com.example.offerdaysongs.dto.CompanyDto;
 import com.example.offerdaysongs.dto.RecordingDto;
 import com.example.offerdaysongs.dto.SingerDto;
-import com.example.offerdaysongs.dto.requests.CreateCompanyRequest;
 import com.example.offerdaysongs.dto.requests.CreateRecordingRequest;
 import com.example.offerdaysongs.model.Recording;
 import com.example.offerdaysongs.service.RecordingService;
@@ -52,9 +50,7 @@ public class RecordingController {
                                 recording.getTitle(),
                                 recording.getVersion(),
                                 recording.getReleaseTime(),
-                                singer != null ? new SingerDto(singer.getId(), singer.getName()) : null);
-
-
-
+                                singer != null ? new SingerDto(singer.getId(), singer.getName()) : null,
+                                recording.getRule());
     }
 }

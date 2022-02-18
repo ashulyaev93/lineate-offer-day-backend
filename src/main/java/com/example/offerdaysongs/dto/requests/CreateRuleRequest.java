@@ -1,11 +1,9 @@
 package com.example.offerdaysongs.dto.requests;
 
 import com.example.offerdaysongs.model.Company;
-import com.example.offerdaysongs.model.Recording;
 import lombok.Data;
 
 import java.time.ZonedDateTime;
-import java.util.Set;
 
 @Data
 public class CreateRuleRequest {
@@ -13,5 +11,4 @@ public class CreateRuleRequest {
     ZonedDateTime endDate;
     Company company;
     Double price;
-    Set<Recording> recordings;
 }

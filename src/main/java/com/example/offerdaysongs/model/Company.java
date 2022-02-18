@@ -1,5 +1,6 @@
 package com.example.offerdaysongs.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String name;
+    @JsonIgnore
     @OneToMany(mappedBy="company")
     Set<Rule> rules;
 }

@@ -26,7 +26,7 @@ public class RecordingService {
     }
 
     public Recording getById(long id) {
-        return recordingRepository.getById(id);
+        return recordingRepository.findById(id).get();
     }
 
     @Transactional
@@ -46,5 +46,4 @@ public class RecordingService {
         }
         return recordingRepository.save(recording);
     }
-
 }

@@ -1,11 +1,11 @@
 package com.example.offerdaysongs.dto;
 
+import com.example.offerdaysongs.model.Recording;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.ZonedDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -15,5 +15,5 @@ public class RuleDto {
     ZonedDateTime endDate;
     CompanyDto company;
     Double price;
-    Set<RecordingDto> recordings;
+    List<Recording> recordings;
 }

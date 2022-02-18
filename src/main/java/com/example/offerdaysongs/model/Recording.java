@@ -1,5 +1,6 @@
 package com.example.offerdaysongs.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,12 +22,13 @@ public class Recording {
     String title;
     String version;
     ZonedDateTime releaseTime;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id", insertable = false, updatable = false)
     Singer singer;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "rule_recording",
             joinColumns = @JoinColumn(name = "recording_id"),
             inverseJoinColumns = @JoinColumn(name = "rule_id"))
-    Set<Rule> rules;
+    Set<Rule> rule;
 }

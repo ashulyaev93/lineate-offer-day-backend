@@ -1,25 +1,18 @@
 package com.example.offerdaysongs.service;
 
-import com.example.offerdaysongs.dto.requests.CreateRecordingRequest;
 import com.example.offerdaysongs.model.Rule;
-import com.example.offerdaysongs.model.Singer;
-import com.example.offerdaysongs.repository.RecordingRepository;
 import com.example.offerdaysongs.repository.RuleRepository;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 public class RuleService {
 
     private RuleRepository ruleRepository;
-    private RecordingRepository recordingRepository;
 
-    public RuleService(RuleRepository ruleRepository,
-                       RecordingRepository recordingRepository){
+    public RuleService(RuleRepository ruleRepository){
         this.ruleRepository = ruleRepository;
-        this.recordingRepository = recordingRepository;
     }
 
     public List<Rule> getAll() {
@@ -27,7 +20,7 @@ public class RuleService {
     }
 
     public Rule getById(long id) {
-        return ruleRepository.getById(id);
+        return ruleRepository.findById(id).get();
     }
 
     public void delete(Long id){ruleRepository.deleteById(id);}
