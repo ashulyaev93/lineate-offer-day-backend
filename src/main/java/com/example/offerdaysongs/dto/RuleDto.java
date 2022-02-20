@@ -1,5 +1,6 @@
 package com.example.offerdaysongs.dto;
 
+import com.example.offerdaysongs.model.Company;
 import com.example.offerdaysongs.model.Recording;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

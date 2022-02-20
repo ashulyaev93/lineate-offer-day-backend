@@ -1,5 +1,6 @@
 package com.example.offerdaysongs.model;
 
+import com.example.offerdaysongs.dto.CompanyDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +24,7 @@ public class Rule {
     ZonedDateTime endDate;
     @ManyToOne
     @JoinColumn(name="company_id", nullable=false)
-    Company company;
+    CompanyDto company;
     Double price;
     @JsonIgnore
     @ManyToMany(mappedBy = "rule")

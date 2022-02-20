@@ -2,7 +2,9 @@ package com.example.offerdaysongs.service;
 
 import com.example.offerdaysongs.dto.requests.CreateCompanyRequest;
 import com.example.offerdaysongs.model.Company;
+import com.example.offerdaysongs.model.Rule;
 import com.example.offerdaysongs.repository.CompanyRepository;
+import com.example.offerdaysongs.repository.RuleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

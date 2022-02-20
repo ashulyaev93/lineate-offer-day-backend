@@ -2,8 +2,10 @@ package com.example.offerdaysongs.controller;
 
 import com.example.offerdaysongs.dto.CompanyDto;
 import com.example.offerdaysongs.dto.RuleDto;
-import com.example.offerdaysongs.dto.requests.CreateRuleRequest;
+import com.example.offerdaysongs.dto.requests.CreateRuleRequest;;
+import com.example.offerdaysongs.model.Company;
 import com.example.offerdaysongs.model.Rule;
+import com.example.offerdaysongs.service.CompanyService;
 import com.example.offerdaysongs.service.RuleService;
 
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -16,7 +18,6 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -25,9 +26,11 @@ import java.util.stream.Collectors;
 public class RuleController {
 
     private final RuleService ruleService;
+    private final CompanyService companyService;
 
-    public RuleController(RuleService ruleService){
+    public RuleController(RuleService ruleService, CompanyService companyService){
         this.ruleService = ruleService;
+        this.companyService = companyService;
     }
 
     @GetMapping("/{id}")
@@ -56,11 +59,19 @@ public class RuleController {
         ZonedDateTime localDateTimeEnd = date2.atStartOfDay(ZoneId.systemDefault());
 
         return rules.stream()
-                .filter(s -> s.getStartDate().isAfter(localDateTimeStart))
-                .filter(e -> e.getEndDate().isBefore(localDateTimeEnd))
+                .filter(s -> s.getStartDate().isAfter(localDateTimeStart) && s.getEndDate().isBefore(localDateTimeEnd))
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
+
+//    @GetMapping("/{company}")
+//    public List<RuleDto> getAllRule(@PathVariable String company){
+//        var rules = companyService.getAll();
+//        return rules.stream()
+//                .filter(company::)
+//                .map(this::convertToDto)
+//                .collect(Collectors.toList());
+//    }
 
     @PostMapping("/")
     public RuleDto create(@RequestBody CreateRuleRequest request) {

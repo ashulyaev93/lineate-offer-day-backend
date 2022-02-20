@@ -2,6 +2,7 @@ package com.example.offerdaysongs.controller;
 
 import com.example.offerdaysongs.dto.CompanyDto;
 import com.example.offerdaysongs.dto.RecordingDto;
+import com.example.offerdaysongs.dto.RuleDto;
 import com.example.offerdaysongs.dto.SingerDto;
 import com.example.offerdaysongs.dto.requests.CreateCompanyRequest;
 import com.example.offerdaysongs.model.Company;

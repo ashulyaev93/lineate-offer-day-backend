@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -44,7 +45,13 @@ public class RuleService {
         rule.setPrice(request.getPrice());
         rule.setRecordings(request.getRecordings());
 
-        return ruleRepository.save(rule);
+        if(Objects.isNull(request)){
+            return null;
+        }else{
+            ruleRepository.save(rule);
+        }
+
+        return rule;
     }
 
     public Optional<Rule> update(CreateRuleRequest request) {

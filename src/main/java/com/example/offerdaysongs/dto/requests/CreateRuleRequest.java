@@ -1,6 +1,6 @@
 package com.example.offerdaysongs.dto.requests;
 
-import com.example.offerdaysongs.model.Company;
+import com.example.offerdaysongs.dto.CompanyDto;
 import com.example.offerdaysongs.model.Recording;
 import lombok.Data;
 
@@ -12,7 +12,7 @@ public class CreateRuleRequest {
     Long id;
     ZonedDateTime startDate;
     ZonedDateTime endDate;
-    Company company;
+    CompanyDto company;
     Double price;
     List<Recording> recordings;
 }
