@@ -69,9 +69,9 @@ public class RuleController {
     }
 
     @PutMapping("/")
-    public ResponseEntity<Rule> update(@RequestBody CreateRuleRequest request) {
+    public ResponseEntity<RuleDto> update(@RequestBody RuleDto ruleDto) {
 
-        Optional<Rule> optional = ruleService.update(request);
+        Optional<RuleDto> optional = ruleService.update(ruleDto);
 
         if(optional.isEmpty()){
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);

@@ -1,7 +1,11 @@
 package com.example.offerdaysongs.service;
 
+import com.example.offerdaysongs.dto.RuleDto;
 import com.example.offerdaysongs.dto.requests.CreateRuleRequest;
+import com.example.offerdaysongs.model.Company;
 import com.example.offerdaysongs.model.Rule;
+import com.example.offerdaysongs.model.Singer;
+import com.example.offerdaysongs.repository.CompanyRepository;
 import com.example.offerdaysongs.repository.RuleRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +18,11 @@ import java.util.Optional;
 public class RuleService {
 
     private final RuleRepository ruleRepository;
+    private final CompanyRepository companyRepository;
 
-    public RuleService(RuleRepository ruleRepository){
+    public RuleService(RuleRepository ruleRepository, CompanyRepository companyRepository){
         this.ruleRepository = ruleRepository;
+        this.companyRepository = companyRepository;
     }
 
     public List<Rule> getAll() {
@@ -40,27 +46,58 @@ public class RuleService {
         Rule rule = new Rule();
         rule.setStartDate(request.getStartDate());
         rule.setEndDate(request.getEndDate());
+        var companyDto = request.getCompany();
+        if(companyDto != null){
+            var company = companyRepository.findById(companyDto.getId()).orElseGet(() -> {
+                var temp = new Company();
+                temp.setName(companyDto.getName());
+                temp.setRules(companyDto.getRules());
+                return companyRepository.save(temp);
+            });
         rule.setCompany(request.getCompany());
+        }
         rule.setPrice(request.getPrice());
         rule.setRecordings(request.getRecordings());
 
-        if(Objects.isNull(request)){
+        return ruleRepository.save(rule);
+    }
+
+    @Transactional
+    public RuleDto save(RuleDto ruleDto) {//доделать
+        Rule rule = new Rule();
+        ruleDto.setId(rule.getId());
+        ruleDto.setStartDate(rule.getStartDate());
+        ruleDto.setEndDate(rule.getEndDate());
+        var companyDto = rule.getCompany();
+        if(companyDto != null){
+            var company = companyRepository.findById(companyDto.getId()).orElseGet(() -> {
+                var temp = new Company();
+                temp.setName(companyDto.getName());
+                temp.setRules(companyDto.getRules());
+                return companyRepository.save(temp);
+            });
+//            ruleDto.setCompany(rule.getCompany());
+        }
+        ruleDto.setPrice(rule.getPrice());
+        ruleDto.setRecordings(rule.getRecordings());
+
+        if (Objects.isNull(ruleDto)) {
             return null;
-        }else{
+        } else {
             ruleRepository.save(rule);
         }
 
-        return rule;
+        return ruleDto;
     }
 
-    public Optional<Rule> update(CreateRuleRequest request) {
+    public Optional<RuleDto> update(RuleDto ruleDto) {
 
-        Optional<Rule> optionalRule = ruleRepository.findById(request.getId());
+        Optional<Rule> optionalRule = ruleRepository.findById(ruleDto.getId());
 
         if(optionalRule.isEmpty()){
             return Optional.empty();
         }
 
-        return Optional.of(create(request));
+        return Optional.of(save(ruleDto));
     }
 }
