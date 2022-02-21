@@ -1,6 +1,5 @@
 package com.example.offerdaysongs.service;
 
-import com.example.offerdaysongs.dto.RuleDto;
 import com.example.offerdaysongs.dto.requests.CreateRuleRequest;
 import com.example.offerdaysongs.model.Rule;
 import com.example.offerdaysongs.repository.RuleRepository;

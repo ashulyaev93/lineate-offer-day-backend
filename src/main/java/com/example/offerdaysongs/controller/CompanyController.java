@@ -1,12 +1,8 @@
 package com.example.offerdaysongs.controller;
 
 import com.example.offerdaysongs.dto.CompanyDto;
-import com.example.offerdaysongs.dto.RecordingDto;
-import com.example.offerdaysongs.dto.RuleDto;
-import com.example.offerdaysongs.dto.SingerDto;
 import com.example.offerdaysongs.dto.requests.CreateCompanyRequest;
 import com.example.offerdaysongs.model.Company;
-import com.example.offerdaysongs.model.Singer;
 import com.example.offerdaysongs.service.CompanyService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +33,7 @@ public class CompanyController {
     }
 
     @GetMapping("/{id:[\\d]+}")
-    public CompanyDto get(@PathVariable(ID) long id) {
+    public CompanyDto get(@PathVariable(ID) Long id) {
         var company = companyService.getById(id);
         return convertToDto(company);
     }
@@ -49,7 +45,7 @@ public class CompanyController {
 
 
     private CompanyDto convertToDto(Company company){
-        return new CompanyDto(company.getId(), company.getName());
+        return new CompanyDto(company.getId(), company.getName(),company.getRules());
      }
 
 }

@@ -3,7 +3,6 @@ package com.example.offerdaysongs.controller;
 import com.example.offerdaysongs.dto.CompanyDto;
 import com.example.offerdaysongs.dto.RuleDto;
 import com.example.offerdaysongs.dto.requests.CreateRuleRequest;;
-import com.example.offerdaysongs.model.Company;
 import com.example.offerdaysongs.model.Rule;
 import com.example.offerdaysongs.service.CompanyService;
 import com.example.offerdaysongs.service.RuleService;
@@ -64,15 +63,6 @@ public class RuleController {
                 .collect(Collectors.toList());
     }
 
-//    @GetMapping("/{company}")
-//    public List<RuleDto> getAllRule(@PathVariable String company){
-//        var rules = companyService.getAll();
-//        return rules.stream()
-//                .filter(company::)
-//                .map(this::convertToDto)
-//                .collect(Collectors.toList());
-//    }
-
     @PostMapping("/")
     public RuleDto create(@RequestBody CreateRuleRequest request) {
         return convertToDto(ruleService.create(request));
@@ -110,7 +100,7 @@ public class RuleController {
                 rule.getId(),
                 rule.getStartDate(),
                 rule.getEndDate(),
-                company != null ? new CompanyDto(company.getId(), company.getName()) : null,
+                company != null ? new CompanyDto(company.getId(), company.getName(), company.getRules()) : null,
                 rule.getPrice(),
                 rule.getRecordings());
     }
