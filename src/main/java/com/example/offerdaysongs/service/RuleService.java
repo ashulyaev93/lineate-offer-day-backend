@@ -1,8 +1,10 @@
 package com.example.offerdaysongs.service;
 
 import com.example.offerdaysongs.dto.RuleDto;
+import com.example.offerdaysongs.dto.requests.CreateRecordingRequest;
 import com.example.offerdaysongs.dto.requests.CreateRuleRequest;
 import com.example.offerdaysongs.model.Company;
+import com.example.offerdaysongs.model.Recording;
 import com.example.offerdaysongs.model.Rule;
 import com.example.offerdaysongs.model.Singer;
 import com.example.offerdaysongs.repository.CompanyRepository;
@@ -54,7 +56,7 @@ public class RuleService {
                 temp.setRules(companyDto.getRules());
                 return companyRepository.save(temp);
             });
-        rule.setCompany(request.getCompany());
+        rule.setCompany(company);
         }
         rule.setPrice(request.getPrice());
         rule.setRecordings(request.getRecordings());
@@ -76,7 +78,7 @@ public class RuleService {
                 temp.setRules(companyDto.getRules());
                 return companyRepository.save(temp);
             });
-//            ruleDto.setCompany(rule.getCompany());
+//            ruleDto.setCompany(company);
         }
         ruleDto.setPrice(rule.getPrice());
         ruleDto.setRecordings(rule.getRecordings());

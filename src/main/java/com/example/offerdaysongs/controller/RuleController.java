@@ -33,9 +33,9 @@ public class RuleController {
     }
 
     @GetMapping("/{id}")
-    public RuleDto get(@PathVariable Long id) {
+    public ResponseEntity<RuleDto> get(@PathVariable Long id) {
         var rule = ruleService.getById(id);
-        return convertToDto(rule);
+        return ResponseEntity.ok(convertToDto(rule));
     }
 
     @GetMapping("/")
@@ -58,7 +58,8 @@ public class RuleController {
         ZonedDateTime localDateTimeEnd = date2.atStartOfDay(ZoneId.systemDefault());
 
         return rules.stream()
-                .filter(s -> s.getStartDate().isAfter(localDateTimeStart) && s.getEndDate().isBefore(localDateTimeEnd))
+                .filter(s -> s.getStartDate().isAfter(localDateTimeStart))
+                .filter(e -> e.getEndDate().isBefore(localDateTimeEnd))
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
@@ -95,7 +96,6 @@ public class RuleController {
     private RuleDto convertToDto(Rule rule)
     {
         var company = rule.getCompany();
-
         return new RuleDto(
                 rule.getId(),
                 rule.getStartDate(),
